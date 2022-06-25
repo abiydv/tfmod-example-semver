@@ -1,0 +1,34 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.tf'
+      - '.github/workflows/release.yml'
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'abiydv'
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.x
+
+      - name: install-dependencies
+        run: npm install @semantic-release/git@10.0.0 @semantic-release/github@8.0.4 @semantic-release/changelog@6.0.0 conventional-changelog-conventionalcommits@4.6.3 -D
+
+      - name: release
+        run: npx semantic-release@18
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
