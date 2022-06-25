@@ -31,12 +31,17 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | ami | ID of AMI to use for the instance | `string` | n/a | yes |
+| availability\_zone | AZ to start the instance in | `string` | `null` | no |
 | instance\_type | The type of instance to start | `string` | `"t3.micro"` | no |
+| subnet\_id | The VPC Subnet ID to launch in | `string` | `null` | no |
 | tags | A mapping of tags to assign to the resource | `map(string)` | `{}` | no |
+| vpc\_security\_group\_ids | A list of security group IDs to associate with | `list(string)` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | arn | ARN of the instance |
+| availability\_zone | Availability zone of the instance |
 | id | The ID of the instance |
+| subnet\_id | Subnet-id of the instance |

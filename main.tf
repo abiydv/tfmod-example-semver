@@ -1,5 +1,8 @@
 resource "aws_instance" "this" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  tags          = var.tags
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  availability_zone      = var.availability_zone
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = var.vpc_security_group_ids
+  tags                   = var.tags
 }
